@@ -1,0 +1,78 @@
+/* ---------- TreeList Utils ---------- */
+
+	/* Global utils */
+$font-size:        14px;
+$line-spacing:     $font-size * (140 / 100);
+$border-radius:    2px;
+$border-thickness: 1px;
+	/* TreeList specification */
+$treelist-expander: 15px;
+$treelist-expander-offset: 2px;
+$treelist-padding: 5px;
+$treelist-text-margin: $treelist-padding + $treelist-expander;
+	/* Colors */ 
+$color-dark-text:       rgb(20, 20, 20);
+$color-dark-border:   	rgb(20, 20, 20);
+
+
+/* ---------- TreeList style ---------- */
+
+
+.tree-list {
+	box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  font-size: $font-size;
+	height: auto;
+  line-height: $line-spacing;
+	margin: 0;
+	overflow: hidden;
+	padding: $treelist-padding;
+
+	.tree-list-node {
+		box-sizing: border-box;
+		clear: both;
+		cursor: pointer;
+		display: inline-block;
+ 		float: left;
+		position: relative;
+
+		.vector {
+			height: $treelist-expander;
+		  left: $treelist-expander-offset;			
+			margin: 0;
+	    position: absolute;
+	    top: $treelist-expander-offset;
+			width: $treelist-expander;
+
+			svg {
+				height: $treelist-expander;
+				transform: scale(0.8);
+				width: $treelist-expander;
+			}
+		}
+
+		p {
+			background: rgba(0, 0, 0, 0.1);
+			border-radius: $border-radius;
+			clear: both;
+  		font-size: .85em;			
+ 			float: left;
+	    line-height: 20px;
+			margin: 0;		    
+			margin-bottom: 3px;
+	    margin-left: $treelist-text-margin;
+	    max-width: 100%;
+	    padding: 0 $treelist-padding;
+	    white-space: nowrap;
+		}
+
+		p:hover {
+			color: red;
+		}
+
+		.tree-list-node.tree-list-node { // Add margin-left to offset child from its parent
+			margin-left: $treelist-expander;
+			width: auto;
+		}	
+	}
+}

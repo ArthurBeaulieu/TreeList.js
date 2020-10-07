@@ -1,0 +1,46 @@
+[{
+    "id": 1,
+    "name": "Metallica",
+    "children": [{
+        "id": 2,
+        "name": "1982 - Kill'Em all",
+        "children": []
+    },
+    {
+        "id": 3,
+        "name": "1984 - Ride The Lightning",
+        "children": []
+    },
+    {
+        "id": 4,
+        "name": "1986 - Master Of Puppets",
+        "children": []
+    },
+    {
+        "id": 5,
+        "name": "1988 - ...And Justice For All",
+        "children": [{
+            "id": 6,
+            "name": "104 - One"
+        }]
+    }]
+},
+{
+    "id": 7,
+    "name": "Alice Cooper",
+    "children": [{
+        "id": 8,
+        "name": "1972 - Scholl's Out",
+        "children": []
+    },
+    {
+        "id": 9,
+        "name": "1975 - Welcome To My Nightmare",
+        "children": []
+    },
+    {
+        "id": 10,
+        "name": "2011 - Welcome To My Nightmare 2",
+        "children": []
+    }]
+}]

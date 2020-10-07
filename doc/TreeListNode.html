@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: TreeListNode | TreeList.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">TreeList.js</a></h1>
+        
+            <span class="version">v0.0.1</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="TreeList.html">TreeList</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TreeList_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="TreeList.html#_container">_container</a></li><li><a href="TreeList.html#_nodeClicked">_nodeClicked</a></li><li><a href="TreeList.html#_nodes">_nodes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="TreeList.html#._buildModel">_buildModel</a></li><li><a href="TreeList.html#._buildNode">_buildNode</a></li><li><a href="TreeList.html#._buildUI">_buildUI</a></li><li><a href="TreeList.html#.collapseAll">collapseAll</a></li><li><a href="TreeList.html#.destroy">destroy</a></li><li><a href="TreeList.html#.expandAll">expandAll</a></li></ul></div></li><li><a href="TreeListNode.html">TreeListNode</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TreeListNode_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="TreeListNode.html#_children">_children</a></li><li><a href="TreeListNode.html#_clicked">_clicked</a></li><li><a href="TreeListNode.html#_depth">_depth</a></li><li><a href="TreeListNode.html#_dom">_dom</a></li><li><a href="TreeListNode.html#_id">_id</a></li><li><a href="TreeListNode.html#_isExpanded">_isExpanded</a></li><li><a href="TreeListNode.html#_isLeaf">_isLeaf</a></li><li><a href="TreeListNode.html#_name">_name</a></li><li><a href="TreeListNode.html#_svgPath">_svgPath</a></li><li><a href="TreeListNode.html#children">children</a></li><li><a href="TreeListNode.html#container">container</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="TreeListNode.html#._buildUI">_buildUI</a></li><li><a href="TreeListNode.html#._onNodeClick">_onNodeClick</a></li><li><a href="TreeListNode.html#._onNodeToggle">_onNodeToggle</a></li><li><a href="TreeListNode.html#.collapse">collapse</a></li><li><a href="TreeListNode.html#.collapseAll">collapseAll</a></li><li><a href="TreeListNode.html#.destroy">destroy</a></li><li><a href="TreeListNode.html#.expand">expand</a></li><li><a href="TreeListNode.html#.expandAll">expandAll</a></li><li><a href="TreeListNode.html#.setExpander">setExpander</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>TreeListNode<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="TreeListNode">
+            
+                new <span class="type-signature"></span>TreeListNode<span class="signature">(options)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line19">line 19</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary"><p>Create a node for the TreeList</p></p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This class is made to create each node in the TreeList. Nodes are build recursively and stored in 
+a child nodes array. Each node contains identification information, among other useful values ; depth in tree, expand state
+and leaf state. They also hold any mouse interaction the user could have on the node. Finally, those nodes are expandable/collapsable
+if they contain child nodes.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The node options</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    -1
+                
+                </td>
+            
+
+            <td class="description last"><p>The element ID, must be provided in model input object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The node name, mandatory as it is the <code>innerHTML</code> content</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>depth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The node depth in tree list, mandatory as it is the <code>innerHTML</code> content</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>clicked</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The callback function to provided that will be called each time the node is clicked</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>October 2020</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Arthur Beaulieu</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+
+<dt>
+<h4 class="name" id="_children">
+    <span class="type-signature"><span class="icon green">private</span> </span>_children<span class="type-signature"> :array</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line55">line 55</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node children</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">array</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_clicked">
+    <span class="type-signature"><span class="icon green">private</span> </span>_clicked<span class="type-signature"> :function</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line44">line 44</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The callback function to call when node is clicked</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">function</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_depth">
+    <span class="type-signature"><span class="icon green">private</span> </span>_depth<span class="type-signature"> :number</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line41">line 41</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node depth in graph</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_dom">
+    <span class="type-signature"><span class="icon green">private</span> </span>_dom<span class="type-signature"> :object</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line59">line 59</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node DOM elements</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_id">
+    <span class="type-signature"><span class="icon green">private</span> </span>_id<span class="type-signature"> :number</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line35">line 35</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node ID</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_isExpanded">
+    <span class="type-signature"><span class="icon green">private</span> </span>_isExpanded<span class="type-signature"> :boolean</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line51">line 51</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The expand state of node</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_isLeaf">
+    <span class="type-signature"><span class="icon green">private</span> </span>_isLeaf<span class="type-signature"> :boolean</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line48">line 48</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The leaf state of node</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_name">
+    <span class="type-signature"><span class="icon green">private</span> </span>_name<span class="type-signature"> :string</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line38">line 38</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node name to display</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="_svgPath">
+    <span class="type-signature"><span class="icon green">private</span> </span>_svgPath<span class="type-signature"> :object</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line69">line 69</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Expand/Collapse icon svg pathes</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="children">
+    <span class="type-signature"></span>children<span class="type-signature"> :array</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line275">line 275</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node children</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">array</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="container">
+    <span class="type-signature"></span>container<span class="type-signature"> :object</span>
+    
+    <div class="container-source members">
+        <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+        <code><a href="TreeListNode.js.html#line280">line 280</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The node DOM container</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id="._buildUI">
+            
+                <span class="type-signature"><span class="icon green">private</span>, <span class="icon green">static</span> </span>_buildUI<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line111">line 111</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will build the node DOM element and fill their attributes.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="._onNodeClick">
+            
+                <span class="type-signature"><span class="icon green">private</span>, <span class="icon green">static</span> </span>_onNodeClick<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line130">line 130</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method is called on click event on the node container. It will call the given callback
+if any was provided.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="._onNodeToggle">
+            
+                <span class="type-signature"><span class="icon green">private</span>, <span class="icon green">static</span> </span>_onNodeToggle<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line150">line 150</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will collapse or expand node only if it has children.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".collapse">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>collapse<span class="signature">(recursive<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line226">line 226</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will collapse the node only if it has children. The collapse can be recursiv through the
+node children if given flag is provided.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recursive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Propagate the collapse call through each children of this node</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".collapseAll">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>collapseAll<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line262">line 262</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will collapse all nodes starting from this node.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".destroy">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>destroy<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line81">line 81</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>TreeListNode destructor. Will delete node and its children, their events and their properties.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".expand">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>expand<span class="signature">(recursive<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line201">line 201</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will expand the node only if it has children. The expand can be recursiv through the
+node children if given flag is provided.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recursive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Propagate the expand call through each children of this node</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".expandAll">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>expandAll<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line251">line 251</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will expand all nodes starting from this node.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".setExpander">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>setExpander<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="TreeListNode.js.html">TreeListNode.js</a></code>,
+                <code><a href="TreeListNode.js.html#line174">line 174</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <blockquote>This method will append an expander to the node only if it has children. It must be called
+we all the TreeList is created, since it is recursive. See TreeList implementation.</blockquote>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">TreeList.js - Version 0.0.1</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'TreeListNode_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

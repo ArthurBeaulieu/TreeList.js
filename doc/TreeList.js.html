@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: TreeList.js | TreeList.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">TreeList.js</a></h1>
+        
+            <span class="version">v0.0.1</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="TreeList.html">TreeList</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TreeList_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="TreeList.html#_container">_container</a></li><li><a href="TreeList.html#_nodeClicked">_nodeClicked</a></li><li><a href="TreeList.html#_nodes">_nodes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="TreeList.html#._buildModel">_buildModel</a></li><li><a href="TreeList.html#._buildNode">_buildNode</a></li><li><a href="TreeList.html#._buildUI">_buildUI</a></li><li><a href="TreeList.html#.collapseAll">collapseAll</a></li><li><a href="TreeList.html#.destroy">destroy</a></li><li><a href="TreeList.html#.expandAll">expandAll</a></li></ul></div></li><li><a href="TreeListNode.html">TreeListNode</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TreeListNode_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="TreeListNode.html#_children">_children</a></li><li><a href="TreeListNode.html#_clicked">_clicked</a></li><li><a href="TreeListNode.html#_depth">_depth</a></li><li><a href="TreeListNode.html#_dom">_dom</a></li><li><a href="TreeListNode.html#_id">_id</a></li><li><a href="TreeListNode.html#_isExpanded">_isExpanded</a></li><li><a href="TreeListNode.html#_isLeaf">_isLeaf</a></li><li><a href="TreeListNode.html#_name">_name</a></li><li><a href="TreeListNode.html#_svgPath">_svgPath</a></li><li><a href="TreeListNode.html#children">children</a></li><li><a href="TreeListNode.html#container">container</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="TreeListNode.html#._buildUI">_buildUI</a></li><li><a href="TreeListNode.html#._onNodeClick">_onNodeClick</a></li><li><a href="TreeListNode.html#._onNodeToggle">_onNodeToggle</a></li><li><a href="TreeListNode.html#.collapse">collapse</a></li><li><a href="TreeListNode.html#.collapseAll">collapseAll</a></li><li><a href="TreeListNode.html#.destroy">destroy</a></li><li><a href="TreeListNode.html#.expand">expand</a></li><li><a href="TreeListNode.html#.expandAll">expandAll</a></li><li><a href="TreeListNode.html#.setExpander">setExpander</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import TreeListNode from './TreeListNode.js';
+'use strict';
+
+
+class TreeList {
+
+
+  /** @summary Create a tree list view with interactive nodes
+   * @author Arthur Beaulieu
+   * @since October 2020
+   * @description &lt;blockquote>This component will build a hierarchical tree with given model. The model must fit the format
+   * described in the &lt;code>README.md&lt;/code>. Each node can then be expanded or collapsed if it contains children. Each node
+   * will also fire a given callback when clicked, sending its information so further handling can be done on the caller side.
+   * It finally expose some global method to update the tree by code (expand or collapse all).&lt;/blockquote>
+   * @param {object} options - The TreeList global options
+   * @param {object} options.renderTo - The DOM element to render the TreeList in
+   * @param {object[]} options.model - The model to build the TreeList with. Must match the format described on this component's repository 
+   * @param {function} [options.nodeClicked] - The callback function to provided that will be called each time a node is clicked */
+  constructor(options = {}) {
+    // Prevent wrong type for arguments, fallback according to attribute utility
+    if (typeof options.renderTo !== 'object' || (options.renderTo &amp;&amp; !options.renderTo.appendChild)) {
+      options.renderTo = document.body;
+    }
+    if (typeof options.model !== 'object') {
+      options.model = [];
+    }
+    if (typeof options.nodeClicked !== 'function') {
+      options.nodeClicked = undefined;
+    }    
+    /** @private
+     * @member {array} - Nodes that have a depth of 0. Child nodes are available and hierarchical */
+   	this._nodes = [];
+    /** @private
+     * @member {object} - The DOM element to render the TreeList in */
+   	this._container = options.renderTo;
+    /** @private
+     * @member {function} - The callback function to provided that will be called each time a node is clicked */
+    this._nodeClicked = options.nodeClicked;
+    // Build model (ie build hierarchical nodes) and build ui DOM elements
+   	this._buildModel(options.model);
+   	this._buildUI();
+  }
+
+
+  /** @method
+   * @name destroy
+   * @public
+   * @memberof TreeList
+   * @description &lt;blockquote>TreeList destructor. Will delete each nodes, their events and their properties.&lt;/blockquote> */
+  destroy() {
+    // Destroy model children, they will recursively destroy any existing nodes and listeners
+    for (let i = 0; i &lt; this._nodes.length; ++i) {
+      this._nodes[i].destroy();
+    }
+    // Delete object attributes
+    Object.keys(this).forEach(key => {
+      delete this[key];
+    });     
+  }
+
+
+  /*  --------------------------------------------------------------------------------------------------------------- */
+  /*  --------------------------------------  TREELIST JS INTERN METHODS  ------------------------------------------  */
+  /*                                                                                                                  */
+  /*  The following methods are made to build nodes according to the given model, store them and display them.        */
+  /*  --------------------------------------------------------------------------------------------------------------- */  
+
+
+  /** @method
+   * @name _buildModel
+   * @private
+   * @memberof TreeList
+   * @description &lt;blockquote>This method will build the TreeList using the provided model. It build the tree nodes recursively,
+   * so they match the hierarchical format given as input model.&lt;/blockquote>
+   * @param {object} model - The model to build the TreeList with. Must match the format described on this component's repository */
+	_buildModel(model) {
+		for (let i = 0; i &lt; model.length; ++i) {
+			this._nodes.push(this._buildNode(model[i], 0));
+		}
+	}
+
+
+  /** @method
+   * @name _buildNode
+   * @private
+   * @memberof TreeList
+   * @description &lt;blockquote>This method will build the TreeList using the provided model. It build the tree nodes recursively,
+   * so they match the hierarchical format given as input model.&lt;/blockquote>
+   * @param {object} nodeModel - The node model that contains its information
+   * @param {number} [nodeModel.id=-1] - The node ID
+   * @param {number} nodeModel.name - The node name to display in TreeList
+   * @param {array} nodeModel.children - The node children
+   * @param {number} depth - The node depth in graph
+   * @return {object} The TreeListNode object */
+  _buildNode(nodeModel, depth) {
+    // No need to pass children since we need full model generation before assigning descendants
+    const node = new TreeListNode({
+      id: nodeModel.id,
+      name: nodeModel.name,
+      depth: depth,
+      clicked: this._nodeClicked
+    });
+    // Construct child node if any
+    if (nodeModel.children &amp;&amp; nodeModel.children.length > 0) {
+      for (let i = 0; i &lt; nodeModel.children.length; ++i) {
+        node.children.push(this._buildNode(nodeModel.children[i], depth + 1));
+      }
+    }
+    // Set expander only when children have been recursively constructed
+    node.setExpander();
+    return node;    
+  }
+
+
+  /** @method
+   * @name _buildUI
+   * @private
+   * @memberof TreeList
+   * @description &lt;blockquote>This method will attach root nodes (depth 0) to the TreeList UI.&lt;/blockquote> */
+	_buildUI() {
+		this._container.classList.add('tree-list');
+
+		for (let i = 0; i &lt; this._nodes.length; ++i) {
+			this._container.appendChild(this._nodes[i].container);
+		}
+	}
+
+
+  /*  --------------------------------------------------------------------------------------------------------------- */
+  /*  --------------------------------------  TREELIST JS PUBLIC METHOD  -------------------------------------------  */
+  /*                                                                                                                  */
+  /*  The following methods are made expand all or collapse all nodes in the tree list.                               */
+  /*  --------------------------------------------------------------------------------------------------------------- */  
+
+
+  /** @method
+   * @name expandAll
+   * @public
+   * @memberof TreeList
+   * @description &lt;blockquote>This method will expand all nodes in the TreeList recursively.&lt;/blockquote> */
+  expandAll() {
+    for (let i = 0; i &lt; this._nodes.length; ++i) {
+      this._nodes[i].expand(true);
+    }
+  }
+
+
+  /** @method
+   * @name collapseAll
+   * @public
+   * @memberof TreeList
+   * @description &lt;blockquote>This method will collapse all nodes in the TreeList recursively.&lt;/blockquote> */
+  collapseAll() {
+    for (let i = 0; i &lt; this._nodes.length; ++i) {
+      this._nodes[i].collapse(true);
+    }
+  }
+
+
+};
+
+
+export default TreeList;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">TreeList.js - Version 0.0.1</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
